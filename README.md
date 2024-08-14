@@ -43,3 +43,5 @@ Behind the scences, this workflow run automatically patched the cluster id acros
 ### 3. Add the software templates
 
 After these preparations, you can proceed with the steps in the book in _"Chapter 3: Templates - Application head start"_ at the section _"Template registration"_.
+
+test
