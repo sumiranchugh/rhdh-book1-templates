@@ -42,7 +42,7 @@ spec:
           title: Cluster Id
           type: string
           description: Id of the cluster
-          default: <XXX_XXX_XXX>
+          default: .apps.demo-01-rhsys.wzhlab.top
         namespace: 
           title: Namespace
           type: string
