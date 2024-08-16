@@ -151,7 +151,7 @@ spec:
       input:
         appName: ${{parameters.namespace}}-${{parameters.application_id}}-bootstrap
         argoInstance: main
-        namespace: janus-argocd
+        namespace: ${{parameters.namespace}}
         repoUrl: https://gitlab-demo-gitlab${{parameters.cluster_id}}/${{parameters.gitlabGroup}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
         path: 'argocd/'
   output:
