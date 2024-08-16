@@ -95,7 +95,7 @@ spec:
         url: ./skeleton
         targetPath: ./source
         values:
-          git_host: gitlab-demo-gitlab${{parameters.cluster_id}}
+          git_host: gitlab-${{parameters.k8s-namespace}}${{parameters.cluster_id}}
           gitlabGroup: ${{parameters.gitlabGroup}}
           repoName: ${{parameters.namespace}}-${{parameters.application_id}}
           owner: ${{parameters.owner}}
@@ -109,7 +109,7 @@ spec:
       input:
         sourcePath: ./source
         description: ${{parameters.description}}
-        repoUrl: gitlab-demo-gitlab${{parameters.cluster_id}}?owner=${{parameters.gitlabGroup}}&repo=${{parameters.namespace}}-${{parameters.application_id}}
+        repoUrl: gitlab-${{parameters.k8s-namespace}}${{parameters.cluster_id}}?owner=${{parameters.gitlabGroup}}&repo=${{parameters.namespace}}-${{parameters.application_id}}
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public
@@ -120,11 +120,11 @@ spec:
         url: ./manifests
         copyWithoutTemplating: []
         values:
-          git_host: gitlab-demo-gitlab${{parameters.cluster_id}}
+          git_host: gitlab-${{parameters.k8s-namespace}}${{parameters.cluster_id}}
           component_id: ${{parameters.namespace}}-${{parameters.application_id}}
           description: ${{parameters.description}}
-          destination: https://gitlab-gitlab${{parameters.cluster_id}}/${{parameters.gitlabGroup}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
-          source_repository: https://gitlab-gitlab${{parameters.cluster_id}}/${{parameters.gitlabGroup}}/${{parameters.namespace}}-${{parameters.application_id}}.git
+          destination: https://gitlab-${{parameters.k8s-namespace}}${{parameters.cluster_id}}/${{parameters.gitlabGroup}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
+          source_repository: https://gitlab-${{parameters.k8s-namespace}}${{parameters.cluster_id}}/${{parameters.gitlabGroup}}/${{parameters.namespace}}-${{parameters.application_id}}.git
           repository_name: ${{parameters.namespace}}-${{parameters.application_id}}
           git_owner: ${{parameters.gitlabGroup}}
           cluster: ${{parameters.cluster_id}}
@@ -139,7 +139,7 @@ spec:
       name: Publishing to Deployment Resource Repository
       action: publish:gitlab
       input:
-        repoUrl: gitlab-demo-gitlab${{parameters.cluster_id}}?owner=${{parameters.gitlabGroup}}&repo=${{parameters.namespace}}-${{parameters.application_id}}-gitops
+        repoUrl: gitlab-${{parameters.k8s-namespace}}${{parameters.cluster_id}}?owner=${{parameters.gitlabGroup}}&repo=${{parameters.namespace}}-${{parameters.application_id}}-gitops
         title: gitops resources for ${{parameters.namespace}}-poi-backend-app
         description: gitops resources for ${{parameters.namespace}}-poi-backend-app
         sourcePath: ./tenant-gitops
@@ -159,7 +159,7 @@ spec:
         appName: ${{parameters.namespace}}-${{parameters.application_id}}-bootstrap
         argoInstance: main
         namespace: ${{parameters.gitops_namespace}}
-        repoUrl: https://gitlab-demo-gitlab${{parameters.cluster_id}}/${{parameters.gitlabGroup}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
+        repoUrl: https://gitlab-${{parameters.k8s-namespace}}${{parameters.cluster_id}}/${{parameters.gitlabGroup}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
         path: 'argocd/'
   output:
     links:
