@@ -40,6 +40,7 @@ spec:
       required:
         - cluster_id
         - namespace
+        - gitops_namespace
         - application_id
         - owner
       properties:
@@ -49,10 +50,15 @@ spec:
           description: Id of the cluster
           default: .apps.demo-01-rhsys.wzhlab.top
         namespace:
-          title: Namespace
+          title: Target Namespace
           type: string
-          description: Namespace
+          description: Namespace for deploying the component
           default: demo-play
+        gitops_namespace:
+          title: GitOps Namespace
+          type: string
+          description: Namespace for storing gitops resources
+          default: demo-gitops
         application_id: 
           title: Application Id
           type: string
@@ -123,6 +129,7 @@ spec:
           git_owner: ${{parameters.gitlabGroup}}
           cluster: ${{parameters.cluster_id}}
           namespace: ${{parameters.namespace}}
+          gitops_namespace: ${{parameters.gitops_namespace}}
           image_host: ${{parameters.image_host}}
           image_name: ${{parameters.namespace}}/${{parameters.application_id}}
           image_tag: ${{parameters.image_tag}}
@@ -151,7 +158,7 @@ spec:
       input:
         appName: ${{parameters.namespace}}-${{parameters.application_id}}-bootstrap
         argoInstance: main
-        namespace: ${{parameters.namespace}}
+        namespace: ${{parameters.gitops_namespace}}
         repoUrl: https://gitlab-demo-gitlab${{parameters.cluster_id}}/${{parameters.gitlabGroup}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
         path: 'argocd/'
   output:
