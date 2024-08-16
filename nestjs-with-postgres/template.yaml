@@ -52,10 +52,12 @@ spec:
           title: Namespace
           type: string
           description: Namespace
+          default: demo-play
         application_id: 
           title: Application Id
           type: string
           description: Id of the application
+          default: demo-01
         owner:
           title: Owner
           type: string
