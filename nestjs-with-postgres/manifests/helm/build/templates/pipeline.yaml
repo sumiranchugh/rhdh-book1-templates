@@ -35,6 +35,8 @@ spec:
           value: $(params.source-repo)
         - name: revision
           value: $(params.source-branch)
+        - name: sslVerify
+          value: false
       taskRef:
         kind: ClusterTask
         name: git-clone
