@@ -10,6 +10,8 @@ metadata:
     backstage.io/techdocs-ref: dir:.
     gitlab.com/project-slug: ${{values.gitlabGroup}}/${{values.repoName}}
     janus-idp.io/tekton : ${{values.component_id}}
+    argocd/app-selector: ${{values.component_id}}-dev
+    argocd/instance-name: main
   tags:
     - nodejs
     - nestjs
