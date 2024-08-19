@@ -20,4 +20,4 @@ spec:
         - '-c'
       image: 'quay.io/openshift/origin-cli:latest'
       name: resync
-      resources: {}
+      # resources: {}
