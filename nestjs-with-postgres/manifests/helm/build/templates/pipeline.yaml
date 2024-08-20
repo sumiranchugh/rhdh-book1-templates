@@ -55,6 +55,8 @@ spec:
       workspaces:
         - name: source
           workspace: source-folder
+        - name: dockerconfig
+          workspace: docker-auth
     - name: resync
       params:
         - name: COMPONENT_ID
@@ -68,3 +70,4 @@ spec:
         name: resync-{{ .Values.app.name }}
   workspaces:
     - name: source-folder
+    - name: docker-auth
