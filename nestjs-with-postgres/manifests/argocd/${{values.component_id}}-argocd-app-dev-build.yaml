@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: ${{values.destination}}
-    targetRevision: HEAD
+    targetRevision: main
     path: ./helm/build
   destination:
     server: https://kubernetes.default.svc
