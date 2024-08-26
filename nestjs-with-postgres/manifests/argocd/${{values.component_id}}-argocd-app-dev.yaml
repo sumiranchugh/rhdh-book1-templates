@@ -38,4 +38,4 @@ spec:
     - group: apps
       kind: Deployment
       jqPathExpressions:
-        - .spec.template.spec.containers[].image | select(startswith("${{values.image_host}}"))
+        - .spec.template.spec.containers[].image | select(startswith("image-registry.openshift-image-registry.svc:5000"))
