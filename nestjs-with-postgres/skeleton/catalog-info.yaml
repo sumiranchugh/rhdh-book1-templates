@@ -13,7 +13,7 @@ metadata:
     janus-idp.io/tekton : ${{values.component_id}}
     argocd/app-selector: wzhlab.top/app-name=${{values.component_id}}-dev
     argocd/instance-name: main
-    jfrog-artifactory/image-name: ${{parameters.application_id}}
+    jfrog-artifactory/image-name: ${{values.component_id}}
   tags:
     - nodejs
     - nestjs
