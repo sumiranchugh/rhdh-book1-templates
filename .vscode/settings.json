@@ -1,0 +1,9 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/app-config.json": [
+            "file:///home/wzh/dev/rhdh-book1-templates/nestjs-with-postgres/template.yaml",
+            "file:///home/wzh/dev/rhdh-book1-templates/quarkus-with-angular/template.yaml"
+        ]
+    },
+    "ansible.python.interpreterPath": "/home/wzh/tutorial-env/bin/python3"
+}

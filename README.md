@@ -1,47 +1,73 @@
-# RHDH Software Templates for the Book "Prepare to Perform"
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+</p>
 
-Instead of directly using this repository for working with the book's example, please create your own fork first. In the forked repository, make the necessary cluster specific changes using the provided GitHub Action before finally adding the templates to your Red Hat Developer Hub instance.
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-### 1. Create your fork
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-From the menu bar in the top right choose the **Fork** button.
+## Description
 
-![fork repo](docs/images/01_fork_repo.png)
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-In the fork dialog choose where (i.e. Owner) your forked repository should be stored and what name it should get. Confirm by clicking the **Create fork** button.
+## Installation
 
-![create fork dialog](docs/images/02_create_fork_dialog.png)
+```bash
+$ npm install
+```
 
-Eventually, you'll end up in the main overview page of your forked repository. 
+## Running the app
 
-![forked repo overview](docs/images/03_forked_repo_overview.png)
+```bash
+# development
+$ npm run start
 
-### 2. Run the Github Action
+# watch mode
+$ npm run start:dev
 
-Choose the Actions tab from the top menu bar. Since this repository contains a workflow file you need to explicitly **enable workflows** in your fork by clicking the corresponding button.
+# production mode
+$ npm run start:prod
+```
 
-![forked repo enable github actions](docs/images/04_forked_repo_gh_actions_enable.png)
+## Test
 
-This brings you directly to the Workflow overview page. Choose **adapt-cluster-id** from the left navigation and then click the **Run workflow** drop-down on the far right.
+```bash
+# unit tests
+$ npm run test
 
-![forked repo github actions](docs/images/06_forked_repo_run_workflow_1.png)
+# e2e tests
+$ npm run test:e2e
 
-In that dialog, **specify the cluster id** for your RHDH instance. The format varies but it could look like this: *.apps.cluster-hhlrf.sandbox1697.opentlc.com*
+# test coverage
+$ npm run test:cov
+```
 
-![forked repo run workflow](docs/images/07_forked_repo_run_workflow_2.png)
+## Support
 
-Confirm by clicking the **Run workflow** button. This will queue a new workflow run which will get started soon and is expected to finish successfully within just a few moments.
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-![forked repo workflow success](docs/images/10_forked_repo_run_workflow_success.png)
+## Stay in touch
 
-Behind the scences, this workflow run automatically patched the cluster id across all four software templates used in the book's examples. You can see the results as part of a new commit on the main branch in your forked repository.
+- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-![forked repo workflow results 1](docs/images/11_forked_repo_workflow_results_1.png)
+## License
 
-![forked repo workflow results 2](docs/images/12_forked_repo_workflow_results_2.png)
-
-### 3. Add the software templates
-
-After these preparations, you can proceed with the steps in the book in _"Chapter 3: Templates - Application head start"_ at the section _"Template registration"_.
-
-test
+Nest is [MIT licensed](LICENSE).

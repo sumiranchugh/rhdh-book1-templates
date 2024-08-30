@@ -1,0 +1,80 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: demo-play-demo-01
+  description: 'The NestJS service plus PostgreSQL databaes for demo-play-demo-01 (Creates a NestJS Service together with a PostgreSQL database)'
+  annotations:
+    # argocd/app-name: demo-play-demo-01-dev
+    wzhlab.top/app-name: demo-play-demo-01-dev
+    backstage.io/kubernetes-id: demo-play-demo-01
+    backstage.io/kubernetes-namespace: demo-play
+    backstage.io/techdocs-ref: dir:.
+    gitlab.com/project-slug: development/demo-play-demo-01
+    janus-idp.io/tekton : demo-play-demo-01
+    argocd/app-selector: wzhlab.top/app-name=demo-play-demo-01-dev
+    argocd/instance-name: main
+    jfrog-artifactory/image-name: demo-01
+  tags:
+    - nodejs
+    - nestjs
+    - book
+    - example
+  links:
+    - url: https://console-openshift-console.apps.demo-01-rhsys.wzhlab.top/dev-pipelines/ns/demo-play/
+      title: Pipelines
+      icon: web
+    - url: https://console-openshift-console.apps.demo-01-rhsys.wzhlab.top/k8s/ns/demo-play/deployments/demo-play-demo-01
+      title: Deployment
+      icon: web
+    - url: https://devspaces.apps.demo-01-rhsys.wzhlab.top/#https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-01?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
+      title: OpenShift Dev Spaces
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: "user:default/demo-user"
+  system: idp-system-demo-play
+  providesApis:
+    - demo-play-demo-01-api
+  dependsOn: 
+    - resource:default/demo-play-demo-01-db
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: idp-system-demo-play
+  tags:
+    - rhdh
+    - book
+spec:
+  owner: "user:default/demo-user"
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: demo-play-demo-01-api
+  description: API surface exposed by the NestJS service
+  links:
+    - url: https://demo-play-demo-01-demo-play.apps.demo-01-rhsys.wzhlab.top/swagger
+      title: Swagger UI
+      icon: web
+    - url: https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-01/-/blob/main/openapi.yaml
+      title: API Spec
+      icon: code
+spec:
+  type: openapi
+  lifecycle: production
+  owner: "user:default/demo-user"
+  system: idp-system-demo-play
+  definition:
+    $text: ./openapi.yaml
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: demo-play-demo-01-db
+  description: database backing the NestJS service
+spec:
+  type: database
+  owner: "user:default/demo-user"
+  system: idp-system-demo-play
