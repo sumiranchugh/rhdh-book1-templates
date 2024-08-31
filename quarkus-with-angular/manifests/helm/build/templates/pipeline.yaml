@@ -64,6 +64,8 @@ spec:
       workspaces:
         - name: source
           workspace: source-folder
+        - name: dockerconfig
+          workspace: docker-auth          
     - name: resync
       params:
         - name: COMPONENT_ID
@@ -78,3 +80,4 @@ spec:
   workspaces:
     - name: source-folder
     - name: maven-settings
+    - name: docker-auth

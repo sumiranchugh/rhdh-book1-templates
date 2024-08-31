@@ -41,6 +41,7 @@ spec:
       required:
         - cluster_id
         - namespace
+        - gitops_namespace
         - application_id
         - owner
       properties:
@@ -102,6 +103,7 @@ spec:
           cluster_id: ${{parameters.cluster_id}}
           namespace: ${{parameters.namespace}}
           component_id: ${{parameters.namespace}}-${{parameters.application_id}}
+          application_id: ${{parameters.application_id}}
           description: ${{parameters.description}}
     - id: publishSource
       name: Publishing to Source Code Repository

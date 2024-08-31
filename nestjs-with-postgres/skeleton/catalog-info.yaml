@@ -5,12 +5,12 @@ metadata:
   description: 'The NestJS service plus PostgreSQL databaes for ${{values.component_id}} (${{values.description}})'
   annotations:
     # argocd/app-name: ${{values.component_id}}-dev
-    wzhlab.top/app-name: ${{values.component_id}}-dev
     backstage.io/kubernetes-id: ${{values.component_id}}
     backstage.io/kubernetes-namespace: ${{values.namespace}}
     backstage.io/techdocs-ref: dir:.
     gitlab.com/project-slug: ${{values.gitlabGroup}}/${{values.repoName}}
     janus-idp.io/tekton : ${{values.component_id}}
+    wzhlab.top/app-name: ${{values.component_id}}-dev
     argocd/app-selector: wzhlab.top/app-name=${{values.component_id}}-dev
     argocd/instance-name: main
     jfrog-artifactory/image-name: ${{values.application_id}}

@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   name: {{ .Values.app.componentId }}
   annotations:
-    image.openshift.io/triggers: >-
-      [{"from":{"kind":"ImageStreamTag","name":"{{ .Values.app.applicationId }}:latest","namespace":"{{ .Values.app.namespace }}"},"fieldPath":"spec.template.spec.containers[?(@.name==\"quarkus-template\")].image","pause":"false"}]
+    # image.openshift.io/triggers: >-
+    #   [{"from":{"kind":"ImageStreamTag","name":"{{ .Values.app.applicationId }}:latest","namespace":"{{ .Values.app.namespace }}"},"fieldPath":"spec.template.spec.containers[?(@.name==\"quarkus-template\")].image","pause":"false"}]
   labels:
     {{- include "backstage.labels" . | nindent 4 }}
     {{- include "quarkus-template.labels" . | nindent 4 }}

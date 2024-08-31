@@ -3,18 +3,20 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: ${{values.component_id}}-dev
-  namespace: janus-argocd
+  namespace: ${{values.gitops_namespace}}
   labels:
-    argocd/app-name: ${{values.component_id}}-dev
+    # argocd/app-name: ${{values.component_id}}-dev
+    wzhlab.top/app-name: ${{values.component_id}}-dev
   annotations:
-    argocd/app-name: ${{values.component_id}}-dev
+    # argocd/app-name: ${{values.component_id}}-dev
+    wzhlab.top/app-name: ${{values.component_id}}-dev
   finalizers:
     - resources-finalizer.argocd.argoproj.io  
 spec:
   project: default
   source:
     repoURL: ${{values.destination}}
-    targetRevision: HEAD
+    targetRevision: main
     path: ./helm/app
   destination:
     server: https://kubernetes.default.svc
