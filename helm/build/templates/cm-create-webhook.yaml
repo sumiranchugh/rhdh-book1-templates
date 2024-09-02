@@ -38,7 +38,6 @@ data:
               url: '{{ "{{" }} webhook_url {{ "}}" }}'
               push_events: true
               tag_push_events: true
-              releases_events: true
               token: '{{ "{{" }} webhook_secret {{ "}}" }}'
             headers:
               PRIVATE-TOKEN: '{{ "{{" }} git_token {{ "}}" }}'

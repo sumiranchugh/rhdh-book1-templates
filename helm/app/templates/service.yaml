@@ -4,12 +4,12 @@ kind: Service
 metadata:
   name: {{ $.Values.app.componentId }}
   labels:
-    {{- include "nodejs-template.labels" $ | nindent 4 }}
+    {{- include "quarkus-template.labels" $ | nindent 4 }}
 spec:
   type: {{ .type }}
   ports:
     - port: {{ .port }}
       protocol: TCP
   selector:
-    {{- include "nodejs-template.selectorLabels" $ | nindent 4 }}
+    {{- include "quarkus-template.selectorLabels" $ | nindent 4 }}
 {{- end }}

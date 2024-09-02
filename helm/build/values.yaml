@@ -1,18 +1,18 @@
 app:
-  name: demo-play-demo-01
+  name: demo-play-demo-02
   namespace: demo-play
   cluster: .apps.demo-01-rhsys.wzhlab.top
 
 git:
   branch: main
-  repo: https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-01.git
+  repo: https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-02.git
   org: development
-  name: demo-play-demo-01
+  name: demo-play-demo-02
   host: gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top
   token: ''
   webhookSecret: ''
 
 image:
-  host: 192.168.50.17:8082
-  name: demo-play/demo-01
+  host: image-registry.openshift-image-registry.svc:5000
+  name: demo-play/demo-02
   tag: latest

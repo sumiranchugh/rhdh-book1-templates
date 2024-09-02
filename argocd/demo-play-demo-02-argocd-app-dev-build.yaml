@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: demo-play-demo-01-dev-build
+  name: demo-play-demo-02-dev-build
   namespace: demo-gitops
   finalizers:
     - resources-finalizer.argocd.argoproj.io  
 spec:
   project: default
   source:
-    repoURL: https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-01-gitops.git
+    repoURL: https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-02-gitops.git
     targetRevision: main
     path: ./helm/build
   destination:

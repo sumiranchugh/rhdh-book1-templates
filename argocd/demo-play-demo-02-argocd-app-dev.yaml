@@ -2,20 +2,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: demo-play-demo-01-dev
+  name: demo-play-demo-02-dev
   namespace: demo-gitops
   labels:
-    # argocd/app-name: demo-play-demo-01-dev
-    wzhlab.top/app-name: demo-play-demo-01-dev
+    # argocd/app-name: demo-play-demo-02-dev
+    wzhlab.top/app-name: demo-play-demo-02-dev
   annotations:
-    # argocd/app-name: demo-play-demo-01-dev
-    wzhlab.top/app-name: demo-play-demo-01-dev
+    # argocd/app-name: demo-play-demo-02-dev
+    wzhlab.top/app-name: demo-play-demo-02-dev
   finalizers:
     - resources-finalizer.argocd.argoproj.io  
 spec:
   project: default
   source:
-    repoURL: https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-01-gitops.git
+    repoURL: https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-02-gitops.git
     targetRevision: main
     path: ./helm/app
   destination:
@@ -34,8 +34,3 @@ spec:
         duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
         factor: 2 # a factor to multiply the base duration after each failed retry
         maxDuration: 10m # the maximum amount of time allowed for the backoff strategy
-  # ignoreDifferences:
-  #   - group: apps
-  #     kind: Deployment
-  #     jqPathExpressions:
-  #       - .spec.template.spec.containers[].image | select(startswith("image-registry.openshift-image-registry.svc:5000"))

@@ -1,5 +1,5 @@
 ---
-apiVersion: triggers.tekton.dev/v1beta1
+apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
   name: {{ .Values.app.name }}-run-pipeline
@@ -17,9 +17,9 @@ spec:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        name: {{ .Values.app.name }}-$(uid)
+        generateName: {{ .Values.app.name }}-
         labels:
-          backstage.io/kubernetes-id: demo-play-demo-01
+          backstage.io/kubernetes-id: demo-play-demo-02
       spec:
         params:
           - name: source-repo
@@ -41,3 +41,5 @@ spec:
                 resources:
                   requests:
                     storage: 1Gi
+          - emptyDir: {}
+            name: maven-settings

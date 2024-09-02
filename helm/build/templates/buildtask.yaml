@@ -1,4 +1,4 @@
-apiVersion: tekton.dev/v1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: kaniko-{{ .Values.app.name }}
@@ -55,27 +55,6 @@ spec:
         - --digest-file=$(results.IMAGE_DIGEST.path)
         - --ignore-path=/usr/bin/newuidmap
         - --ignore-path=/usr/bin/newgidmap
-        
-      # script: |
-      #   #!/busybox/sh
-      #   echo 'current pwd:'
-      #   pwd
-      #   echo
-      #   echo 'list root:'
-      #   ls -al /
-      #   echo
-      #   echo 'list kaniko:'
-      #   ls -alR /kaniko
-      #   echo
-      #   echo 'list workspace:'
-      #   ls -alR /workspace
-      #   echo
-      #   echo 'list tekton:'
-      #   ls -alR /tekton
-      #   echo
-      #   echo 'list tekton-custom-certs:'
-      #   ls -alR /tekton-custom-certs
-
       # kaniko assumes it is running as root, which means this example fails on platforms
       # that default to run containers as random uid (like OpenShift). Adding this securityContext
       # makes it explicit that it needs to run as root.

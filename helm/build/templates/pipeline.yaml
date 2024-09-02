@@ -1,11 +1,11 @@
 ---
-apiVersion: tekton.dev/v1
+apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: {{ .Values.app.name }}-pipeline
   labels:
     type: pipeline
-    backstage.io/kubernetes-id: demo-play-demo-01
+    backstage.io/kubernetes-id: demo-play-demo-02
 spec:
   params:
     - name: source-repo
@@ -43,12 +43,23 @@ spec:
       workspaces:
         - name: output
           workspace: source-folder
+    - name: package
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: source-folder
+        - name: maven-settings
+          workspace: maven-settings
     - name: build-and-push
       params:
         - name: IMAGE
           value: $(params.output-image)
       runAfter:
-        - git-clone
+        - package
       taskRef:
         kind: Task
         name: kaniko-{{ .Values.app.name }}
@@ -56,7 +67,7 @@ spec:
         - name: source
           workspace: source-folder
         - name: dockerconfig
-          workspace: docker-auth
+          workspace: docker-auth          
     - name: resync
       params:
         - name: COMPONENT_ID
@@ -70,4 +81,5 @@ spec:
         name: resync-{{ .Values.app.name }}
   workspaces:
     - name: source-folder
+    - name: maven-settings
     - name: docker-auth
