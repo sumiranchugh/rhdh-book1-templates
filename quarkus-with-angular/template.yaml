@@ -122,7 +122,7 @@ spec:
         url: ./manifests
         copyWithoutTemplating: []
         values:
-          git_host: gitlab-gitlab${{parameters.cluster_id}}
+          git_host: gitlab-${{parameters.k8s_namespace}}${{parameters.cluster_id}}
           component_id: ${{parameters.namespace}}-${{parameters.application_id}}
           description: ${{parameters.description}}
           destination: https://gitlab-${{parameters.k8s_namespace}}${{parameters.cluster_id}}/${{parameters.gitlabGroup}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
