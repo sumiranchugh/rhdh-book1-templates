@@ -1,42 +1,62 @@
 schemaVersion: 2.1.0
 metadata:
-  generateName: demo-play-demo-01
-  icon: https://nestjs.com/img/logo-small.svg
+  generateName: demo-play-demo-02
 attributes:
   controller.devfile.io/storage-type: ephemeral
 components:
   - name: development-tooling
     container:
+      image: registry.redhat.io/devspaces/udi-rhel8:3.4
+      env:
+        - name: QUARKUS_HTTP_HOST
+          value: 0.0.0.0
+        - name: MAVEN_OPTS
+          value: "-Dmaven.repo.local=/home/user/.m2/repository" 
+      memoryLimit: 5Gi
+      cpuLimit: 2500m
+      volumeMounts:
+        - name: m2
+          path: /home/user/.m2
       endpoints:
-        - name: http-nestjs
-          targetPort: 3000
+        - name: quarkus-development-server
+          targetPort: 8080
           exposure: public
           secure: false
           protocol: http
-      image: registry.redhat.io/devspaces/udi-rhel8:3.4
-      memoryLimit: 2Gi
-      cpuLimit: 2000m
-      volumeMounts:
-        - name: npm
-          path: /home/user/.npm
-  - name: npm
+        - name: debug
+          targetPort: 5005
+          exposure: none
+          secure: false
+          protocol: tcp
+        - name: tests
+          targetPort: 8081
+          exposure: none
+          secure: false
+          protocol: tcp          
+  - name: m2
     volume:
       size: 1G
 commands:
-  - exec:
-      commandLine: npm install
+  - id: package
+    exec:
+      label: "1. Package the application"
       component: development-tooling
+      commandLine: "./mvnw package"
       group:
-        isDefault: true
         kind: build
-      workingDir: ${PROJECT_SOURCE}
-    id: install
-  - exec:
-      commandLine: npm run start
-      component: development-tooling
-      group:
         isDefault: true
+  - id: start-dev
+    exec:
+      label: "2. Start Development mode (Hot reload + debug)"
+      component: development-tooling
+      commandLine: "./mvnw compile quarkus:dev"
+      group:
         kind: run
-      hotReloadCapable: true
-      workingDir: ${PROJECT_SOURCE}
-    id: run
+        isDefault: true
+  - id: fix-java-version
+    exec:
+      component: development-tooling
+      commandLine: 'rm -rf ${HOME}/.java/current/* && ln -s /usr/lib/jvm/java-17-openjdk/* ${HOME}/.java/current'
+events:
+  postStart:
+    - fix-java-version

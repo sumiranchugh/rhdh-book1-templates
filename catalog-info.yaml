@@ -1,32 +1,34 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: demo-play-demo-01
-  description: 'The NestJS service plus PostgreSQL databaes for demo-play-demo-01 (Creates a NestJS Service together with a PostgreSQL database)'
+  name: demo-play-demo-02-service
+  description: 'The Quarkus service for demo-play-demo-02 (Creates a Quarkus service hosting an Angular frontend)'
   annotations:
-    # argocd/app-name: demo-play-demo-01-dev
-    wzhlab.top/app-name: demo-play-demo-01-dev
-    backstage.io/kubernetes-id: demo-play-demo-01
+    # argocd/app-name: demo-play-demo-02-dev
+    backstage.io/kubernetes-id: demo-play-demo-02
     backstage.io/kubernetes-namespace: demo-play
     backstage.io/techdocs-ref: dir:.
-    gitlab.com/project-slug: development/demo-play-demo-01
-    janus-idp.io/tekton : demo-play-demo-01
-    argocd/app-selector: wzhlab.top/app-name=demo-play-demo-01-dev
+    gitlab.com/project-slug: development/demo-play-demo-02
+    wzhlab.top/app-name: demo-play-demo-02-dev
+    argocd/app-selector: wzhlab.top/app-name=demo-play-demo-02-dev
     argocd/instance-name: main
-    jfrog-artifactory/image-name: demo-01
+    janus-idp.io/tekton : demo-play-demo-02
+  labels:
+    backstage.io/kubernetes-id: demo-play-demo-02
   tags:
-    - nodejs
-    - nestjs
+    - java
+    - quarkus
+    - maven
     - book
     - example
   links:
     - url: https://console-openshift-console.apps.demo-01-rhsys.wzhlab.top/dev-pipelines/ns/demo-play/
       title: Pipelines
       icon: web
-    - url: https://console-openshift-console.apps.demo-01-rhsys.wzhlab.top/k8s/ns/demo-play/deployments/demo-play-demo-01
+    - url: https://console-openshift-console.apps.demo-01-rhsys.wzhlab.top/k8s/ns/demo-play/deployments/demo-play-demo-02
       title: Deployment
       icon: web
-    - url: https://devspaces.apps.demo-01-rhsys.wzhlab.top/#https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-01?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
+    - url: https://devspaces.apps.demo-01-rhsys.wzhlab.top/#https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-02?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
       title: OpenShift Dev Spaces
       icon: web
 spec:
@@ -35,9 +37,7 @@ spec:
   owner: "user:default/demo-user"
   system: idp-system-demo-play
   providesApis:
-    - demo-play-demo-01-api
-  dependsOn: 
-    - resource:default/demo-play-demo-01-db
+    - demo-play-demo-02-api
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -52,13 +52,13 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: demo-play-demo-01-api
-  description: API surface exposed by the NestJS service
+  name: demo-play-demo-02-api
+  description: API surface exposed by the Quarkus service
   links:
-    - url: https://demo-play-demo-01-demo-play.apps.demo-01-rhsys.wzhlab.top/swagger
+    - url: https://demo-play-demo-02-demo-play.apps.demo-01-rhsys.wzhlab.top/q/swagger-ui
       title: Swagger UI
       icon: web
-    - url: https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-01/-/blob/main/openapi.yaml
+    - url: https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-02/-/blob/main/src/main/resources/META-INF/openapi.yaml
       title: API Spec
       icon: code
 spec:
@@ -67,14 +67,4 @@ spec:
   owner: "user:default/demo-user"
   system: idp-system-demo-play
   definition:
-    $text: ./openapi.yaml
----
-apiVersion: backstage.io/v1alpha1
-kind: Resource
-metadata:
-  name: demo-play-demo-01-db
-  description: database backing the NestJS service
-spec:
-  type: database
-  owner: "user:default/demo-user"
-  system: idp-system-demo-play
+    $text: ./src/main/resources/META-INF/openapi.yaml

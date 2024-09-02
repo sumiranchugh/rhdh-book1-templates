@@ -10,10 +10,9 @@ build-job:
   variables:
     ENTITY_NAMESPACE: 'default'
     ENTITY_KIND: 'Component'
-    ENTITY_NAME: demo-play-demo-01
+    ENTITY_NAME: demo-play-demo-02-service
   image: quay.io/redhat-gpte/techdocs-cli
   stage: build
   script:
   - techdocs-cli generate --no-docker --verbose
   - techdocs-cli publish --publisher-type awsS3 --storage-name $TECHDOCS_S3_BUCKET_NAME --awsEndpoint $AWS_ENDPOINT --awsS3ForcePathStyle --entity $ENTITY_NAMESPACE/$ENTITY_KIND/$ENTITY_NAME
-

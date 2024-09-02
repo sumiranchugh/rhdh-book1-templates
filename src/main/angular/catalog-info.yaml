@@ -1,0 +1,47 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: demo-play-demo-02-frontend
+  description: 'The Angular frontend for demo-play-demo-02 (Creates a Quarkus service hosting an Angular frontend)'
+  annotations:
+    backstage.io/kubernetes-id: demo-play-demo-02
+    backstage.io/kubernetes-namespace: demo-play
+    gitlab.com/project-slug: development/demo-play-demo-02
+    backstage.io/techdocs-entity: component:default/demo-play-demo-02-service
+  labels:
+    backstage.io/kubernetes-id: demo-play-demo-02
+  tags:
+    - typescript
+    - angular
+    - book
+    - example
+  links:
+    - url: https://console-openshift-console.apps.demo-01-rhsys.wzhlab.top/k8s/ns/demo-play/deployments/demo-play-demo-02
+      title: Deployment
+      icon: web
+    - url: https://devspaces.apps.demo-01-rhsys.wzhlab.top/#https://gitlab-demo-gitlab.apps.demo-01-rhsys.wzhlab.top/development/demo-play-demo-02?che-editor=che-incubator/che-code/latest&devfilePath=src/main/angular/.devfile-vscode.yaml
+      title: OpenShift Dev Spaces
+      icon: web
+    - url: https://demo-play-demo-02-demo-play.apps.demo-01-rhsys.wzhlab.top
+      title: demo-play-demo-02 Frontend
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: "user:default/demo-user"
+  system: idp-system-demo-play
+  consumesApis:
+    - demo-play-demo-02-api
+  subcomponentOf: component:default/demo-play-demo-02-service
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: idp-system-demo-play
+  tags:
+    - backstage
+    - janus-idp
+    - rhdh
+    - book
+spec:
+  owner: "user:default/demo-user"

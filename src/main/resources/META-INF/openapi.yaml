@@ -1,0 +1,146 @@
+---
+openapi: 3.0.3
+info:
+  title: Points-of-Interest Proxy / Facade API
+  description: API surface exposed to interact with Backends (summit POIs + parks POIs) via the Proxy / Facade
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  #---------------------------------------------------------------------
+  # TODO:
+  #   Add the secure https route URL pointing to your proxy service into the setting below.
+  #   You can find the route URL in RHDH by inspecting the component's details in the topology view.
+  #   If you used the suggested namespace ('demo01') and component id ('poi-map') it should look like this https://demo01-poi-map-demo01.<cluster_id_here>
+  #   Beware that this must be a secure HTTP URL that starts with 'https://'
+  - url: https://demo-play-demo-02-demo-play.apps.demo-01-rhsys.wzhlab.top
+    description: (RHDH component deployment)
+  #---------------------------------------------------------------------
+  - url: http://localhost:8080/
+    description: (localhost testing)
+paths:
+  /backend/list:
+    get:
+      tags:
+      - Backend Resource
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Backend'
+  /backend/register/{backendId}:
+    get:
+      tags:
+      - Backend Resource
+      parameters:
+      - name: backendId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: endpoint
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /backend/unregister/{backendId}:
+    get:
+      tags:
+      - Backend Resource
+      parameters:
+      - name: backendId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /fake/poi/find/all:
+    get:
+      tags:
+      - Summit Backend Resource
+      responses:
+        "200":
+          description: OK
+  /fake/poi/find/{id}:
+    get:
+      tags:
+      - Summit Backend Resource
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "200":
+          description: OK
+  /fake/ws/info:
+    get:
+      tags:
+      - Summit Backend Resource
+      responses:
+        "200":
+          description: OK
+  /ws/data/all:
+    get:
+      tags:
+      - Gateway Resource
+      parameters:
+      - name: service
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PoiRecord'
+components:
+  schemas:
+    Backend:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        zoom:
+          format: int32
+          type: integer
+    Coordinates:
+      type: object
+      properties:
+        lat:
+          format: double
+          type: number
+        lng:
+          format: double
+          type: number
+    PoiRecord:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        coordinates:
+          type: array
+          items:
+            format: double
+            type: number
