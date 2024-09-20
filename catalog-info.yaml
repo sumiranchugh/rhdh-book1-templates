@@ -32,7 +32,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: "user:default/demo-user"
+  owner: "user:default/sumiranchugh"
   system: idp-system-demo-play
   providesApis:
     - demo-play-demo-01-api
