@@ -47,7 +47,7 @@ metadata:
     - rhdh
     - book
 spec:
-  owner: "user:default/demo-user"
+  owner: "user:default/sumiranchugh"
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
@@ -64,7 +64,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: "user:default/demo-user"
+  owner: "user:default/sumiranchugh"
   system: idp-system-demo-play
   definition:
     $text: ./openapi.yaml
@@ -76,5 +76,5 @@ metadata:
   description: database backing the NestJS service
 spec:
   type: database
-  owner: "user:default/demo-user"
+  owner: "user:default/sumiranchugh"
   system: idp-system-demo-play
